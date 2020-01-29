@@ -40,7 +40,7 @@ namespace InsuranceRenewalReminder
                 //Show notification
                 if (result == null)
                 {
-                    lblResult.Text = "Failed!!";
+                    lblResult.Text = "Output file creation failed!!";
                     lblResult.ForeColor = System.Drawing.Color.Red;
                 }
                 else if (result.ReturnCode < 0)
