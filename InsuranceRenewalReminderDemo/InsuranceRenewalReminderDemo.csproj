@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Default.aspx" />
+    <Content Include="ErrorLogs\30012020.txt" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="Files\InsuranceRenewalReminderTemplate.txt" />
