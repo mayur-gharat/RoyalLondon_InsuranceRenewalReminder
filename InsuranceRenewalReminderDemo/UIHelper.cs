@@ -49,13 +49,13 @@ namespace InsuranceRenewalReminder
                             IpField.ProductName = Values[4];
                             if(double.TryParse(Values[5], out IpField.PayoutAmount) == false)
                             {
-                                Console.WriteLine("Invalid PayoutAmount, Skip this row of ID = " + IpField.ID);
+                                //Console.WriteLine("Invalid PayoutAmount, Skip this row of ID = " + IpField.ID);
                                 Counter++;
                                 continue;
                             }
                             if (double.TryParse(Values[6], out IpField.AnnualPremium) == false)
                             {
-                                Console.WriteLine("Invalid AnnualPremium, Skip this row of ID = " + IpField.ID);
+                                //Console.WriteLine("Invalid AnnualPremium, Skip this row of ID = " + IpField.ID);
                                 Counter++;
                                 continue;
                             }
@@ -68,12 +68,12 @@ namespace InsuranceRenewalReminder
                 else
                 {
                     //Show messge File not found
-                    Console.WriteLine("Input file not found");
+                    //Console.WriteLine("Input file not found");
                 }
             }  
             catch(Exception ex)
             {
-                Console.WriteLine(ex.InnerException);
+                //Console.WriteLine(ex.InnerException);
             }
 
             return InputFields;
@@ -89,7 +89,7 @@ namespace InsuranceRenewalReminder
                 //Negative use case checking
                 if (InputFields == null || InputFields.Count == 0)
                 {
-                    Console.WriteLine("No Inputs received");
+                    //Console.WriteLine("No Inputs received");
                     Response.ReturnCode = -1;
                     Response.ReturnMessage = Response.ReturnMessage + Environment.NewLine + "No Inputs received";
                     return Response;
@@ -132,7 +132,7 @@ namespace InsuranceRenewalReminder
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.InnerException);
+                //Console.WriteLine(ex.InnerException);
                 Response.ReturnCode = -1;
                 Response.ReturnMessage = Response.ReturnMessage + Environment.NewLine + "Error!!!";
                 return Response;
@@ -167,7 +167,7 @@ namespace InsuranceRenewalReminder
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.InnerException);
+                //Console.WriteLine(ex.InnerException);
             }
 
             return FinalContent;
@@ -190,7 +190,7 @@ namespace InsuranceRenewalReminder
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.InnerException);
+                //Console.WriteLine(ex.InnerException);
             }
 
             return TemplateContent;
