@@ -11,9 +11,19 @@ namespace InsuranceRenewalReminder
     /// </summary>
     public class UIHelper
     {
+        /// <summary>
+        /// This method is useful in getting / reading input CSV file
+        /// </summary>
+        /// <param name="FilePath"></param>
+        /// <returns></returns>
         public List<InputField> GetInputFields(string FilePath)
         {
+            #region Declaration
+
+            const string MethodName = "InsuranceRenewalReminder::UIHelper::GetInputFields::  ";
             List<InputField> InputFields = null;
+
+            #endregion
 
             try
             {
@@ -49,13 +59,13 @@ namespace InsuranceRenewalReminder
                             IpField.ProductName = Values[4];
                             if(double.TryParse(Values[5], out IpField.PayoutAmount) == false)
                             {
-                                Console.WriteLine("Invalid PayoutAmount, Skip this row of ID = " + IpField.ID);
+                                InsuranceRenewalReminderDemo.EventLogger.LogWarning(MethodName + "Invalid PayoutAmount, Skip this row of ID = " + IpField.ID);
                                 Counter++;
                                 continue;
                             }
                             if (double.TryParse(Values[6], out IpField.AnnualPremium) == false)
                             {
-                                Console.WriteLine("Invalid AnnualPremium, Skip this row of ID = " + IpField.ID);
+                                InsuranceRenewalReminderDemo.EventLogger.LogWarning(MethodName + "Invalid AnnualPremium, Skip this row of ID = " + IpField.ID);
                                 Counter++;
                                 continue;
                             }
@@ -67,29 +77,42 @@ namespace InsuranceRenewalReminder
                 }
                 else
                 {
-                    //Show messge File not found
-                    Console.WriteLine("Input file not found");
+                    //Log error Show messge File not found
+                    InsuranceRenewalReminderDemo.EventLogger.LogError(MethodName + "Input file not found");
+
                 }
             }  
             catch(Exception ex)
             {
-                Console.WriteLine(ex.InnerException);
+                //Log error 
+                InsuranceRenewalReminderDemo.EventLogger.LogError(MethodName + ex.Message);
             }
 
             return InputFields;
 
         }
 
+        /// <summary>
+        /// This method is is main mathod for creating output files
+        /// </summary>
+        /// <param name="InputFields"></param>
+        /// <returns></returns>
         public ResponseBase CreateOutputFiles(List<InputField> InputFields)
         {
+            #region Declaration
+
+            const string MethodName = "InsuranceRenewalReminder::UIHelper::CreateOutputFiles::  ";
             ResponseBase Response = new ResponseBase();
+            
+            #endregion
+
             try
             {
                 bool FileCreated = false;
                 //Negative use case checking
                 if (InputFields == null || InputFields.Count == 0)
                 {
-                    Console.WriteLine("No Inputs received");
+                    //Console.WriteLine("No Inputs received");
                     Response.ReturnCode = -1;
                     Response.ReturnMessage = Response.ReturnMessage + Environment.NewLine + "No Inputs received";
                     return Response;
@@ -109,6 +132,7 @@ namespace InsuranceRenewalReminder
                     if (!File.Exists(System.Web.HttpContext.Current.Server.MapPath(OutputFilePath + "\\" + FileName)))
                     {
                         string FinalContent = FillTemplateData(TemplateContent.ToString(), InputData);
+                        //string FinalContent = FormatTemplateData(TemplateContent.ToString(), InputData); // Alternate method with compromised readability.
 
                         FileStream FS = new FileStream(System.Web.HttpContext.Current.Server.MapPath(OutputFilePath + "\\" + FileName), FileMode.Create, FileAccess.Write);
                         StreamWriter SW = new StreamWriter(FS);
@@ -118,8 +142,11 @@ namespace InsuranceRenewalReminder
                     }
                     else
                     {
+                        //Update response and log warning
                         Response.ReturnCode = 1;
                         Response.ReturnMessage = Response.ReturnMessage + "<br/>" + "Record for " + FileName  + " already Present, No updates made.";
+
+                        InsuranceRenewalReminderDemo.EventLogger.LogWarning(MethodName + "Record for " + FileName + " already Present, No updates made.");
                     }
 
                 }
@@ -132,7 +159,9 @@ namespace InsuranceRenewalReminder
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.InnerException);
+                //Log error & Return response
+                InsuranceRenewalReminderDemo.EventLogger.LogError(MethodName + ex.Message);
+
                 Response.ReturnCode = -1;
                 Response.ReturnMessage = Response.ReturnMessage + Environment.NewLine + "Error!!!";
                 return Response;
@@ -142,12 +171,18 @@ namespace InsuranceRenewalReminder
 
         }
 
+        /// <summary>
+        /// Take template content and fill all data in it.
+        /// Any change in Template InputFiled will require change in Property Class of InputFeild and mapping in This mathod.
+        /// </summary>
+        /// <param name="Templatecontent"></param>
+        /// <param name="InputData"></param>
+        /// <returns></returns>
         public string FillTemplateData(string Templatecontent, InputField InputData)
         {
-            //Take template content and fill all data in it.
-            //Any change in Template InputFiled will require change in Property Class of InputFeild and mapping in This mathod.
-
+            const string MethodName = "InsuranceRenewalReminder::UIHelper::FillTemplateData::  ";
             string FinalContent = Templatecontent;
+
             try
             {
                 if(!string.IsNullOrWhiteSpace(Templatecontent) && InputData != null)
@@ -167,16 +202,69 @@ namespace InsuranceRenewalReminder
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.InnerException);
+                //Log error
+                InsuranceRenewalReminderDemo.EventLogger.LogError(MethodName + ex.Message);
             }
 
             return FinalContent;
 
         }
 
+        /// <summary>
+        /// Aleternate method for FillTemplateData
+        /// Take template content and fill all data in it using Formated tempate and String.Format method.
+        /// Any change in Template InputFiled will require change in this mathod.
+        /// As we using string.Format here hence code reduced or less than FillTemplateData however Code Readability is compomised here 
+        /// as well as any change in template input will require responsible work in this method as well.
+        /// 
+        /// </summary>
+        /// <param name="TemplateContent"></param>
+        /// <param name="InputData"></param>
+        /// <returns></returns>
+        public string FormatTemplateData(string TemplateContent, InputField InputData)
+        {
+            #region Declaration
+
+            const string MethodName = "InsuranceRenewalReminder::UIHelper::FormatTemplateData::  ";
+            string FinalContent = TemplateContent;
+
+            #endregion
+
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(TemplateContent) && InputData != null)
+                {
+
+                    string[] InputArray = new string[] { DateTime.Now.ToString("dd/MM/yyyy"), InputData.Title, InputData.FirstName, InputData.Surname,
+                        InputData.Title, InputData.Surname, InputData.ProductName, Convert.ToString(InputData.PayoutAmount),
+                        Convert.ToString(InputData.AnnualPremium),Convert.ToString(InputData.CreditCharge),Convert.ToString(InputData.TotalAnnualPremium),
+                        Convert.ToString(InputData.InitialMonthlyPayment),Convert.ToString(InputData.OtherMonthlyPayment) };
+
+                    FinalContent = string.Format(FinalContent, InputArray);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                //Log error
+                InsuranceRenewalReminderDemo.EventLogger.LogError(MethodName + ex.Message);
+            }
+
+            return FinalContent;
+
+        }
+
+        /// <summary>
+        /// Utility method to read the template
+        /// Kept static as for now template will be common for all object / user.
+        /// </summary>
+        /// <returns></returns>
         public static string ReadTemplateFile()
         {
+
+            const string MethodName = "InsuranceRenewalReminder::UIHelper::ReadTemplateFile:: ";
             string TemplateContent = string.Empty;
+            
             try
             {
                 //Get input template path
@@ -190,7 +278,8 @@ namespace InsuranceRenewalReminder
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.InnerException);
+                //Log error
+                InsuranceRenewalReminderDemo.EventLogger.LogError(MethodName + ex.Message);
             }
 
             return TemplateContent;
