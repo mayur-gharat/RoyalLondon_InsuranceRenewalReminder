@@ -13,6 +13,9 @@ namespace InsuranceRenewalReminder
     {
         public List<InputField> GetInputFields(string FilePath)
         {
+
+            //const string MethodName = "InsuranceRenewalReminder::UIHelper::GetInputFields::  ";
+ 
             List<InputField> InputFields = null;
 
             try
@@ -82,6 +85,9 @@ namespace InsuranceRenewalReminder
 
         public ResponseBase CreateOutputFiles(List<InputField> InputFields)
         {
+
+            //const string MethodName = "InsuranceRenewalReminder::UIHelper::GetInputFields::  ";
+ 
             ResponseBase Response = new ResponseBase();
             try
             {
@@ -144,6 +150,9 @@ namespace InsuranceRenewalReminder
 
         public string FillTemplateData(string Templatecontent, InputField InputData)
         {
+
+            //const string MethodName = "InsuranceRenewalReminder::UIHelper::GetInputFields::  ";
+ 
             //Take template content and fill all data in it.
             //Any change in Template InputFiled will require change in Property Class of InputFeild and mapping in This mathod.
 
@@ -176,7 +185,11 @@ namespace InsuranceRenewalReminder
 
         public static string ReadTemplateFile()
         {
+
+            //const string MethodName = "InsuranceRenewalReminder::UIHelper::GetInputFields::  ";
+ 
             string TemplateContent = string.Empty;
+            
             try
             {
                 //Get input template path
