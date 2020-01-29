@@ -2,6 +2,8 @@
 
 FAO : #Title#. #FirstName# #Surname#
 
+RE: Your Renewal
+
 Dear #Title#. #Surname#
 
 We hearby invite you to renew your insurance policy, subject to the following terms.

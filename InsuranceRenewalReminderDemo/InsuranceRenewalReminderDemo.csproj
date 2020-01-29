@@ -70,6 +70,7 @@
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
+    <Content Include="Files\InsuranceRenewalReminderTemplate.txt" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Default.aspx.cs">
@@ -95,6 +96,9 @@
     </None>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Output\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InsuranceRenewalCalculator\InsuranceRenewalCalculator.csproj">
       <Project>{cb472506-073b-41f6-b4d4-ca214f2b7c09}</Project>
