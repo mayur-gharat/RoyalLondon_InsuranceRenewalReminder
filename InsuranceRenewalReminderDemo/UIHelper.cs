@@ -198,10 +198,10 @@ namespace InsuranceRenewalReminder
                     FinalContent = FinalContent.Replace("#ProductName#", InputData.ProductName);
                     FinalContent = FinalContent.Replace("#PayoutAmount#", Convert.ToString(InputData.PayoutAmount));
                     FinalContent = FinalContent.Replace("#AnnualPremium#", Convert.ToString(InputData.AnnualPremium));
-                    FinalContent = FinalContent.Replace("#CreditCharge#", Convert.ToString(InputData.CreditCharge));
-                    FinalContent = FinalContent.Replace("#TotalAnnualPremium#", Convert.ToString(InputData.TotalAnnualPremium));
-                    FinalContent = FinalContent.Replace("#InitialMonthlyPayment#", Convert.ToString(InputData.InitialMonthlyPayment));
-                    FinalContent = FinalContent.Replace("#OtherMonthlyPayment#", Convert.ToString(InputData.OtherMonthlyPayment));
+                    FinalContent = FinalContent.Replace("#CreditCharge#", Convert.ToString(Calculator.CalculateCreditCharge(InputData.AnnualPremium)));
+                    FinalContent = FinalContent.Replace("#TotalAnnualPremium#", Convert.ToString(Calculator.CalculateTotalPremium(InputData.AnnualPremium)));
+                    FinalContent = FinalContent.Replace("#InitialMonthlyPayment#", Convert.ToString(Calculator.CalculateInitialMonthlyPayment(InputData.AnnualPremium)));
+                    FinalContent = FinalContent.Replace("#OtherMonthlyPayment#", Convert.ToString(Calculator.CalculateOtherMonthlyPayment(InputData.AnnualPremium)));
                 }
             }
             catch (Exception ex)
@@ -241,9 +241,12 @@ namespace InsuranceRenewalReminder
                 {
 
                     string[] InputArray = new string[] { DateTime.Now.ToString("dd/MM/yyyy"), InputData.Title, InputData.FirstName, InputData.Surname,
-                        InputData.Title, InputData.Surname, InputData.ProductName, Convert.ToString(InputData.PayoutAmount),
-                        Convert.ToString(InputData.AnnualPremium),Convert.ToString(InputData.CreditCharge),Convert.ToString(InputData.TotalAnnualPremium),
-                        Convert.ToString(InputData.InitialMonthlyPayment),Convert.ToString(InputData.OtherMonthlyPayment) };
+                        InputData.Title, InputData.Surname, InputData.ProductName,
+                        Convert.ToString(InputData.PayoutAmount), Convert.ToString(InputData.AnnualPremium),
+                        Convert.ToString(Calculator.CalculateCreditCharge(InputData.AnnualPremium)),
+                        Convert.ToString(Calculator.CalculateTotalPremium(InputData.AnnualPremium)),
+                        Convert.ToString(Calculator.CalculateInitialMonthlyPayment(InputData.AnnualPremium)),
+                        Convert.ToString(Calculator.CalculateOtherMonthlyPayment(InputData.AnnualPremium)) };
 
                     FinalContent = string.Format(FinalContent, InputArray);
 
