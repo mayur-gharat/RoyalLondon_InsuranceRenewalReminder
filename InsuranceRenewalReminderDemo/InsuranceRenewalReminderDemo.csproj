@@ -74,7 +74,6 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="EventLogger.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -95,6 +94,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\EventLogHandler\EventLogHandler.csproj">
+      <Project>{47943e8d-1a77-4a92-a387-ed61e6175f3f}</Project>
+      <Name>EventLogHandler</Name>
+    </ProjectReference>
     <ProjectReference Include="..\InsuranceRenewalCalculator\InsuranceRenewalCalculator.csproj">
       <Project>{cb472506-073b-41f6-b4d4-ca214f2b7c09}</Project>
       <Name>InsuranceRenewalCalculator</Name>

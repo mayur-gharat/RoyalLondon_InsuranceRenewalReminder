@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Web.Configuration;
 using InsuranceRenewalCalculator;
+using EventLogHandler;
 
 namespace InsuranceRenewalReminder
 {
@@ -22,6 +23,7 @@ namespace InsuranceRenewalReminder
 
             const string MethodName = "InsuranceRenewalReminder::UIHelper::GetInputFields::  ";
             List<InputField> InputFields = null;
+            EventLogger EventLog = new EventLogger();
 
             #endregion
 
@@ -59,13 +61,13 @@ namespace InsuranceRenewalReminder
                             IpField.ProductName = Values[4];
                             if(double.TryParse(Values[5], out IpField.PayoutAmount) == false)
                             {
-                                InsuranceRenewalReminderDemo.EventLogger.LogWarning(MethodName + "Invalid PayoutAmount, Skip this row of ID = " + IpField.ID);
+                                EventLog.LogWarning(MethodName + "Invalid PayoutAmount, Skip this row of ID = " + IpField.ID);
                                 Counter++;
                                 continue;
                             }
                             if (double.TryParse(Values[6], out IpField.AnnualPremium) == false)
                             {
-                                InsuranceRenewalReminderDemo.EventLogger.LogWarning(MethodName + "Invalid AnnualPremium, Skip this row of ID = " + IpField.ID);
+                                EventLog.LogWarning(MethodName + "Invalid AnnualPremium, Skip this row of ID = " + IpField.ID);
                                 Counter++;
                                 continue;
                             }
@@ -78,14 +80,14 @@ namespace InsuranceRenewalReminder
                 else
                 {
                     //Log error Show messge File not found
-                    InsuranceRenewalReminderDemo.EventLogger.LogError(MethodName + "Input file not found");
+                    EventLog.LogError(MethodName + "Input file not found");
 
                 }
             }  
             catch(Exception ex)
             {
                 //Log error 
-                InsuranceRenewalReminderDemo.EventLogger.LogError(MethodName + ex.Message);
+                EventLog.LogError(MethodName + ex.Message);
             }
 
             return InputFields;
@@ -103,7 +105,8 @@ namespace InsuranceRenewalReminder
 
             const string MethodName = "InsuranceRenewalReminder::UIHelper::CreateOutputFiles::  ";
             ResponseBase Response = new ResponseBase();
-            
+            EventLogger EventLog = new EventLogger();
+
             #endregion
 
             try
@@ -146,7 +149,7 @@ namespace InsuranceRenewalReminder
                         Response.ReturnCode = 1;
                         Response.ReturnMessage = Response.ReturnMessage + "<br/>" + "Record for " + FileName  + " already Present, No updates made.";
 
-                        InsuranceRenewalReminderDemo.EventLogger.LogWarning(MethodName + "Record for " + FileName + " already Present, No updates made.");
+                        EventLog.LogWarning(MethodName + "Record for " + FileName + " already Present, No updates made.");
                     }
 
                 }
@@ -160,7 +163,7 @@ namespace InsuranceRenewalReminder
             catch (Exception ex)
             {
                 //Log error & Return response
-                InsuranceRenewalReminderDemo.EventLogger.LogError(MethodName + ex.Message);
+                EventLog.LogError(MethodName + ex.Message);
 
                 Response.ReturnCode = -1;
                 Response.ReturnMessage = Response.ReturnMessage + Environment.NewLine + "Error while generating output file!!!";
@@ -182,6 +185,7 @@ namespace InsuranceRenewalReminder
         {
             const string MethodName = "InsuranceRenewalReminder::UIHelper::FillTemplateData::  ";
             string FinalContent = Templatecontent;
+            EventLogger EventLog = new EventLogger();
 
             try
             {
@@ -203,7 +207,7 @@ namespace InsuranceRenewalReminder
             catch (Exception ex)
             {
                 //Log error
-                InsuranceRenewalReminderDemo.EventLogger.LogError(MethodName + ex.Message);
+                EventLog.LogError(MethodName + ex.Message);
             }
 
             return FinalContent;
@@ -227,6 +231,7 @@ namespace InsuranceRenewalReminder
 
             const string MethodName = "InsuranceRenewalReminder::UIHelper::FormatTemplateData::  ";
             string FinalContent = TemplateContent;
+            EventLogger EventLog = new EventLogger();
 
             #endregion
 
@@ -247,7 +252,7 @@ namespace InsuranceRenewalReminder
             catch (Exception ex)
             {
                 //Log error
-                InsuranceRenewalReminderDemo.EventLogger.LogError(MethodName + ex.Message);
+                EventLog.LogError(MethodName + ex.Message);
             }
 
             return FinalContent;
@@ -264,7 +269,8 @@ namespace InsuranceRenewalReminder
 
             const string MethodName = "InsuranceRenewalReminder::UIHelper::ReadTemplateFile:: ";
             string TemplateContent = string.Empty;
-            
+            EventLogger EventLog = new EventLogger();
+
             try
             {
                 //Get input template path
@@ -279,7 +285,7 @@ namespace InsuranceRenewalReminder
             catch (Exception ex)
             {
                 //Log error
-                InsuranceRenewalReminderDemo.EventLogger.LogError(MethodName + ex.Message);
+                EventLog.LogError(MethodName + ex.Message);
             }
 
             return TemplateContent;
