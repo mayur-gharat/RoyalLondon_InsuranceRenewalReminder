@@ -11,25 +11,25 @@ namespace InsuranceRenewalReminderDemo.Tests
         [TestMethod]
         public void TestCalculateInitialMonthlyPremium()
         {
-            Assert.AreEqual(Helper.CalculateInitialMonthlyPayment(50.00), 4.43);
+            Assert.AreEqual(Calculator.CalculateInitialMonthlyPayment(50.00), 4.43);
         }
 
         [TestMethod]
         public void TestOtherMonthlyPayment()
         {
-            Assert.AreEqual(Helper.CalculateOtherMonthlyPayment(50.00), 4.37);
+            Assert.AreEqual(Calculator.CalculateOtherMonthlyPayment(50.00), 4.37);
         }
 
         [TestMethod]
         public void TestCalculateCreditCharge()
         {
-            Assert.AreEqual(Helper.CalculateCreditCharge(50.00), 2.5);
+            Assert.AreEqual(Calculator.CalculateCreditCharge(50.00), 2.5);
         }
 
         [TestMethod]
         public void TestTotalAnnualPremium()
         {
-            Assert.AreEqual(Helper.CalculateTotalPremium(50.00), 52.50);
+            Assert.AreEqual(Calculator.CalculateTotalPremium(50.00), 52.50);
         }
     }
 }
