@@ -1,9 +1,8 @@
+========== Warning ==========
+InsuranceRenewalReminder::UIHelper::CreateOutputFiles::  Record for 1-Sally_Smith.txt already Present, No updates made.
 
 ========== Warning ==========
-InsuranceRenewalReminder::UIHelper::GetInputFields::  Invalid AnnualPremium, Skip this row of ID = 2
+InsuranceRenewalReminder::UIHelper::CreateOutputFiles::  Record for 2-John_Smith.txt already Present, No updates made.
 
 ========== Warning ==========
-InsuranceRenewalReminder::UIHelper::GetInputFields::  Invalid PayoutAmount, Skip this row of ID = 1
-
-========== ERROR ==========
-InsuranceRenewalReminder::UIHelper::CreateOutputFiles::  Object reference not set to an instance of an object.
+InsuranceRenewalReminder::UIHelper::CreateOutputFiles::  Record for 3-Helen_Daniels.txt already Present, No updates made.
