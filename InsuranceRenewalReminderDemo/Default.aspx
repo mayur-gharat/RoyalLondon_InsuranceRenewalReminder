@@ -2,19 +2,32 @@
 
 <form runat="server">
 
+    <link href="InsuranceRenewal.css" rel="stylesheet" />
+    
     <div class="jumbotron">
         <h1>ROYAL LONDON INSURANCE RENEWAL UTILITY</h1>
         <p class="lead">This utility will help you create templates for emails to be sent to clients for their insurance renewal reminder.</p>
     </div>
 
-    <asp:label id="lblResult" runat="server" text="."></asp:label>
-    <br /><br />
+    <table class="table_main">
+        <tr>
+            <td>
+                <asp:fileupload id="flupload" runat="server" accept="csv"></asp:fileupload>
+                <br />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <asp:button id="btnInput" runat="server" text="Create Reminders" OnClick="btnInput_Click" onClientClick="return ValidateFileUpload();" />
+            </td>
+        </tr>
+        <tr>
+            <td >
+                <asp:label id="lblResult" runat="server" text="."></asp:label>
+            </td>
+        </tr>
+    </table>
     
-    <asp:fileupload id="flupload" runat="server" accept="csv"></asp:fileupload>
-    <%--<asp:CustomValidator ID="CustomValidator1" runat="server" ClientValidationFunction="ValidateFileUpload" ErrorMessage="Invalid file type. Only .CSV are allowed." ControlToValidate="flupload" ValidationGroup="update">&nbsp;</asp:CustomValidator>--%>
-    <br /><br />
-
-    <asp:button id="btnInput" runat="server" text="Create Reminders" OnClick="btnInput_Click" onClientClick="return ValidateFileUpload();" />
     
 <script language="javascript" type="text/javascript">   
 

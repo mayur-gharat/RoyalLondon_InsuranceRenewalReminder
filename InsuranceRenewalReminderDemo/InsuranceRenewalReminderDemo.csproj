@@ -63,6 +63,7 @@
     <Content Include="Default.aspx" />
     <Content Include="ErrorLogs\30012020.txt" />
     <Content Include="Global.asax" />
+    <Content Include="InsuranceRenewal.css" />
     <Content Include="Web.config" />
     <Content Include="Files\InsuranceRenewalReminderTemplate.txt" />
   </ItemGroup>
@@ -101,6 +102,10 @@
     <ProjectReference Include="..\InsuranceRenewalCalculator\InsuranceRenewalCalculator.csproj">
       <Project>{cb472506-073b-41f6-b4d4-ca214f2b7c09}</Project>
       <Name>InsuranceRenewalCalculator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InsuranceRenewalTypes\InsuranceRenewalTypes.csproj">
+      <Project>{e2f89b36-acdb-4bbb-9c3c-ef5b95c7d676}</Project>
+      <Name>InsuranceRenewalTypes</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
