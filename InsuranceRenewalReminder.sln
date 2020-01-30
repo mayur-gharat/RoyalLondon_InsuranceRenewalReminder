@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsuranceRenewalReminderDem
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsuranceRenewalCalculator", "InsuranceRenewalCalculator\InsuranceRenewalCalculator.csproj", "{CB472506-073B-41F6-B4D4-CA214F2B7C09}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventLogHandler", "EventLogHandler\EventLogHandler.csproj", "{47943E8D-1A77-4A92-A387-ED61E6175F3F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{CB472506-073B-41F6-B4D4-CA214F2B7C09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB472506-073B-41F6-B4D4-CA214F2B7C09}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CB472506-073B-41F6-B4D4-CA214F2B7C09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47943E8D-1A77-4A92-A387-ED61E6175F3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47943E8D-1A77-4A92-A387-ED61E6175F3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47943E8D-1A77-4A92-A387-ED61E6175F3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47943E8D-1A77-4A92-A387-ED61E6175F3F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
