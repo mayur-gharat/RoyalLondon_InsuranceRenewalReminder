@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace InsuranceRenewalCalculator
+namespace InsuranceRenewalTypes
 {
     /// <summary>
     /// This is Type for input field in CSV file as well as field needed in template file

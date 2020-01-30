@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using InsuranceRenewalReminderDemo;
+using InsuranceRenewalReminder;
 
 namespace InsuranceRenewalReminderDemo.Tests
 {
@@ -10,7 +10,9 @@ namespace InsuranceRenewalReminderDemo.Tests
         [TestMethod]
         public void TestReadTemplateFile()
         {
-            Assert.IsNotNull(InsuranceRenewalReminder.UIHelper.ReadTemplateFile());
+            TemplateReader TemplateReading = TemplateReader.GetInstance();
+            Assert.IsNotNull(TemplateReading);
+            Assert.IsNotNull(TemplateReading.ReadTemplateFile());
         }
     }
 }
