@@ -36,13 +36,20 @@ namespace InsuranceRenewalCalculator
             return Premium + CalculateCreditCharge(Premium);
         }
 
+        /// <summary>
+        /// The average amount payable per month when paying monthly by Direct Debit
+        /// The Total Premium (Direct Debit) divided by the number of the months in a year.
+        /// </summary>
+        /// <param name="Premium"></param>
+        /// <returns></returns>
         public static double CalculateAvgMonthlyPremium(double Premium)
         {
             return Math.Round(Premium / 12, 2);
         }
 
         /// <summary>
-        /// Other Monthly payment is payment to be done for rest of 11 months having valid currency in decimal on lowar side
+        /// The amount of the other 11 monthly payments.
+        /// Will equal the Average Monthly Premium if that is a whole number of pound and pence; otherwise will be lower.
         /// </summary>
         /// <param name="Premium"></param>
         /// <returns></returns>
@@ -52,7 +59,8 @@ namespace InsuranceRenewalCalculator
         }
 
         /// <summary>
-        /// /// Inital Monthly payment is payment to be done for first month having valid currency in decimal on higher side
+        /// The amount of the First monthly payments.
+        /// Will equal the Average Monthly Premium if that is a whole number of pound and pence; otherwise will be higher.
         /// </summary>
         /// <param name="Premium"></param>
         /// <returns></returns>

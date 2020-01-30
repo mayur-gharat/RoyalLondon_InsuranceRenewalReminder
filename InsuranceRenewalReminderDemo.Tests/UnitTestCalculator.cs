@@ -5,6 +5,10 @@ using InsuranceRenewalCalculator;
 
 namespace InsuranceRenewalReminderDemo.Tests
 {
+    /// <summary>
+    /// Basic test written to test the calculator class
+    /// Can enhance tests so as to meet the business requirements as and when needed.
+    /// </summary>
     [TestClass]
     public class UnitTestCalculator
     {

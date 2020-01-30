@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Web.Configuration;
 using System.Web.UI;
-using InsuranceRenewalCalculator;
+using InsuranceRenewalTypes;
+using EventLogHandler;
 
 namespace InsuranceRenewalReminder
 {
@@ -14,57 +15,65 @@ namespace InsuranceRenewalReminder
 
         protected void btnInput_Click(object sender, EventArgs e)
         {
-            //Reset notification message
-            lblResult.Text = "";
-            lblResult.ForeColor = System.Drawing.Color.Black;
-
-            String FilePath = Server.MapPath(WebConfigurationManager.AppSettings["InputFilePath"] + "\\" + flupload.FileName);
-            if(flupload.HasFile)
+            EventLogger Logger = new EventLogger();
+            try
             {
-                //Upload input file
-                flupload.SaveAs(FilePath);
-            }
-            else
-            {
-                lblResult.Text = "Please select appropreate Input file.";
-                lblResult.ForeColor = System.Drawing.Color.Red;
-            }
+                //Reset notification message
+                lblResult.Text = "";
+                lblResult.ForeColor = System.Drawing.Color.Black;
 
-            //Generate Files
-            System.IO.FileInfo file = new System.IO.FileInfo(FilePath);
-            if (file.Exists)
-            {
-                UIHelper Helper = new UIHelper();
-                ResponseBase result = Helper.CreateOutputFiles(Helper.GetInputFields(FilePath));
-
-                //Show notification
-                if (result == null)
+                String FilePath = Server.MapPath(WebConfigurationManager.AppSettings["InputFilePath"] + "\\" + flupload.FileName);
+                if (flupload.HasFile)
                 {
-                    lblResult.Text = "Output file creation failed!!";
-                    lblResult.ForeColor = System.Drawing.Color.Red;
-                }
-                else if (result.ReturnCode < 0)
-                {
-                    lblResult.Text = result.ReturnMessage;
-                    lblResult.ForeColor = System.Drawing.Color.Red;
-                }
-                else if (result.ReturnCode > 0)
-                {
-                    lblResult.Text = result.ReturnMessage;
-                    lblResult.ForeColor = System.Drawing.Color.Orange;
+                    //Upload input file
+                    flupload.SaveAs(FilePath);
                 }
                 else
                 {
-                    lblResult.Text = "Success!!, Files generated at " + Server.MapPath(WebConfigurationManager.AppSettings["OutputFilePath"]);
-                    if (!string.IsNullOrWhiteSpace(result.ReturnMessage))
-                    {
-                        lblResult.Text = lblResult.Text + "<br/>" + result.ReturnMessage;
-                    }
-                    lblResult.ForeColor = System.Drawing.Color.Green;
+                    lblResult.Text = "Please select appropreate Input file.";
+                    lblResult.ForeColor = System.Drawing.Color.Red;
                 }
 
-                //Delete uploaded file after finish
-                file.Delete();
+                //Generate Files
+                System.IO.FileInfo file = new System.IO.FileInfo(FilePath);
+                if (file.Exists)
+                {
+                    UIHelper Helper = new UIHelper();
+                    ResponseBase result = Helper.CreateOutputFiles(Helper.GetInputFields(FilePath));
+
+                    //Show notification
+                    if (result == null)
+                    {
+                        lblResult.Text = "Output file creation failed!!";
+                        lblResult.ForeColor = System.Drawing.Color.Red;
+                    }
+                    else if (result.ReturnCode < 0)
+                    {
+                        lblResult.Text = result.ReturnMessage;
+                        lblResult.ForeColor = System.Drawing.Color.Red;
+                    }
+                    else if (result.ReturnCode > 0)
+                    {
+                        lblResult.Text = result.ReturnMessage;
+                        lblResult.ForeColor = System.Drawing.Color.Orange;
+                    }
+                    else
+                    {
+                        lblResult.Text = "Success!! Files generated at " + Server.MapPath(WebConfigurationManager.AppSettings["OutputFilePath"]);
+                        if (!string.IsNullOrWhiteSpace(result.ReturnMessage))
+                        {
+                            lblResult.Text = lblResult.Text + "<br/>" + result.ReturnMessage;
+                        }
+                        lblResult.ForeColor = System.Drawing.Color.Green;
+                    }
+
+                    //Delete uploaded file after finish
+                    file.Delete();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException("btnInput_Click:: ", ex);
             }
         }
     }
