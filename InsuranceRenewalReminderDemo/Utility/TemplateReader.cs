@@ -44,7 +44,7 @@ namespace InsuranceRenewalReminder
                 string TemplateFile = WebConfigurationManager.AppSettings["InsuranceRenewalReminderTemplateFile"];
 
                 //Read and return template file
-                using (StreamReader Reader = new StreamReader(System.Web.HttpContext.Current.Server.MapPath(TemplateFile)))
+                using (StreamReader Reader = new StreamReader(System.Web.HttpContext.Current.Server.MapPath(TemplateFile), System.Text.UTF8Encoding.UTF7))
                 {
                     TemplateContent = Reader.ReadToEnd();
                 }
