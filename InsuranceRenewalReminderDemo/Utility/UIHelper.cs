@@ -61,7 +61,7 @@ namespace InsuranceRenewalReminder
                             {
                                 //Set Response + Log warning + increament counter + Go to next row
                                 Response.ReturnCode = 1;
-                                Response.ReturnMessage = Response.ReturnMessage + Environment.NewLine + "Invalid ID, skip input for row of ID = " + Values[0] + ";</br> " +  Environment.NewLine;
+                                Response.ReturnMessage = (string.IsNullOrWhiteSpace(Response.ReturnMessage) ? "" : Response.ReturnMessage + "</br>") + "Invalid ID, skip input for row of ID = " + Values[0] + ";</br> " +  Environment.NewLine;
                                 EventLog.LogWarning(MethodName + "Invalid ID, skip input for row of ID = " + Values[0] + ";" + Environment.NewLine);
                                 Counter++;
                                 continue;
@@ -74,7 +74,7 @@ namespace InsuranceRenewalReminder
                             {
                                 //Set Response + Log warning + increament counter + Go to next row
                                 Response.ReturnCode = 1;
-                                Response.ReturnMessage = Response.ReturnMessage + Environment.NewLine + "Invalid PayoutAmount, skip this row of ID = " + IpField.ID + ";</br> " + Environment.NewLine;
+                                Response.ReturnMessage = (string.IsNullOrWhiteSpace(Response.ReturnMessage) ? "" : Response.ReturnMessage + "</br>") + "Invalid PayoutAmount, skip this row of ID = " + IpField.ID + ";</br> " + Environment.NewLine;
                                 EventLog.LogWarning(MethodName + "Invalid PayoutAmount, Skip this row of ID = " + IpField.ID + ";" + Environment.NewLine);
                                 Counter++;
                                 continue;
@@ -83,7 +83,7 @@ namespace InsuranceRenewalReminder
                             {
                                 //Set Response + Log warning + increament counter + Go to next row
                                 Response.ReturnCode = 1;
-                                Response.ReturnMessage = Response.ReturnMessage + Environment.NewLine + "Invalid AnnualPremium, skip this row of ID = " + IpField.ID + ";</br> " + Environment.NewLine;
+                                Response.ReturnMessage = (string.IsNullOrWhiteSpace(Response.ReturnMessage) ? "" : Response.ReturnMessage + "</br>") + "Invalid AnnualPremium, skip this row of ID = " + IpField.ID + ";</br> " + Environment.NewLine;
                                 EventLog.LogWarning(MethodName + "Invalid AnnualPremium, Skip this row of ID = " + IpField.ID + ";" + Environment.NewLine);
                                 Counter++;
                                 continue;
@@ -140,7 +140,7 @@ namespace InsuranceRenewalReminder
                 {
                     //Console.WriteLine("No Inputs received");
                     Response.ReturnCode = -1;
-                    Response.ReturnMessage = Response.ReturnMessage + Environment.NewLine + "No Inputs received";
+                    Response.ReturnMessage = (string.IsNullOrWhiteSpace(Response.ReturnMessage) ? "" : Response.ReturnMessage + "</br>") +"No Inputs received";
                     return Response;
                 }
                 //Get input template, As template is common for all users hence implemented Singleton pattern
@@ -171,7 +171,7 @@ namespace InsuranceRenewalReminder
                     {
                         //Update response and log warning
                         Response.ReturnCode = 1;
-                        Response.ReturnMessage = Response.ReturnMessage + "<br/>" + "Record for " + FileName  + " already Present, No updates made.";
+                        Response.ReturnMessage = (string.IsNullOrWhiteSpace(Response.ReturnMessage) ? "" : Response.ReturnMessage + "</br>") + "Record for " + FileName  + " already Present, No updates made.";
 
                         EventLog.LogWarning(MethodName + "Record for " + FileName + " already Present, No updates made.");
                     }
