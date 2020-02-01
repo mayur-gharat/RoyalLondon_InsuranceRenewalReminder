@@ -36,7 +36,7 @@ namespace EventLogHandler
             }
             catch (Exception exp)
             {
-                System.Web.HttpContext.Current.Response.Write("Error while saving LogException");
+                System.Web.HttpContext.Current.Response.Write("Error while saving LogException:: " + exp.Message);
             }
         }
 
@@ -59,7 +59,7 @@ namespace EventLogHandler
             }
             catch (Exception ex)
             {
-                System.Web.HttpContext.Current.Response.Write("Error while saving LogError");
+                System.Web.HttpContext.Current.Response.Write("Error while saving LogError"+ ex.Message);
             }
         }
 
@@ -82,7 +82,7 @@ namespace EventLogHandler
             }
             catch (Exception ex)
             {
-                System.Web.HttpContext.Current.Response.Write("Error while saving LogWarning");
+                System.Web.HttpContext.Current.Response.Write("Error while saving LogWarning" + ex.Message);
             }
         }
 
@@ -105,7 +105,7 @@ namespace EventLogHandler
             }
             catch (Exception ex)
             {
-                System.Web.HttpContext.Current.Response.Write("Error while saving LogInformation");
+                System.Web.HttpContext.Current.Response.Write("Error while saving LogInformation" + ex.Message);
             }
         }
     }

@@ -12,7 +12,6 @@ namespace InsuranceRenewalReminderDemo.Tests
         {
             TemplateReader TemplateReading = TemplateReader.GetInstance();
             Assert.IsNotNull(TemplateReading);
-            Assert.IsNotNull(TemplateReading.ReadTemplateFile());
         }
     }
 }

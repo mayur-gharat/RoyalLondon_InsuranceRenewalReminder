@@ -70,6 +70,11 @@ namespace InsuranceRenewalReminder
                     //Delete uploaded file after finish
                     file.Delete();
                 }
+                else
+                {
+                    lblResult.Text = "Error while uploading file, Please select appropreate Input file.";
+                    lblResult.ForeColor = System.Drawing.Color.Red;
+                }
             }
             catch (Exception ex)
             {
