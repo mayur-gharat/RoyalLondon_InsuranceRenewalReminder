@@ -61,7 +61,7 @@ namespace InsuranceRenewalReminder
                             {
                                 //Set Response + Log warning + increament counter + Go to next row
                                 Response.ReturnCode = 1;
-                                Response.ReturnMessage = (string.IsNullOrWhiteSpace(Response.ReturnMessage) ? "" : Response.ReturnMessage + "</br>") + "Invalid ID, skip input for row of ID = " + Values[0] + ";</br> " +  Environment.NewLine;
+                                Response.ReturnMessage = (string.IsNullOrWhiteSpace(Response.ReturnMessage) ? "" : Response.ReturnMessage + "</br>") + "Invalid ID, skip input for row of ID = " + Values[0];
                                 EventLog.LogWarning(MethodName + "Invalid ID, skip input for row of ID = " + Values[0] + ";" + Environment.NewLine);
                                 Counter++;
                                 continue;
@@ -74,7 +74,7 @@ namespace InsuranceRenewalReminder
                             {
                                 //Set Response + Log warning + increament counter + Go to next row
                                 Response.ReturnCode = 1;
-                                Response.ReturnMessage = (string.IsNullOrWhiteSpace(Response.ReturnMessage) ? "" : Response.ReturnMessage + "</br>") + "Invalid PayoutAmount, skip this row of ID = " + IpField.ID + ";</br> " + Environment.NewLine;
+                                Response.ReturnMessage = (string.IsNullOrWhiteSpace(Response.ReturnMessage) ? "" : Response.ReturnMessage + "</br>") + "Invalid PayoutAmount, skip this row of ID = " + IpField.ID;
                                 EventLog.LogWarning(MethodName + "Invalid PayoutAmount, Skip this row of ID = " + IpField.ID + ";" + Environment.NewLine);
                                 Counter++;
                                 continue;
@@ -83,7 +83,7 @@ namespace InsuranceRenewalReminder
                             {
                                 //Set Response + Log warning + increament counter + Go to next row
                                 Response.ReturnCode = 1;
-                                Response.ReturnMessage = (string.IsNullOrWhiteSpace(Response.ReturnMessage) ? "" : Response.ReturnMessage + "</br>") + "Invalid AnnualPremium, skip this row of ID = " + IpField.ID + ";</br> " + Environment.NewLine;
+                                Response.ReturnMessage = (string.IsNullOrWhiteSpace(Response.ReturnMessage) ? "" : Response.ReturnMessage + "</br>") + "Invalid AnnualPremium, skip this row of ID = " + IpField.ID;
                                 EventLog.LogWarning(MethodName + "Invalid AnnualPremium, Skip this row of ID = " + IpField.ID + ";" + Environment.NewLine);
                                 Counter++;
                                 continue;
