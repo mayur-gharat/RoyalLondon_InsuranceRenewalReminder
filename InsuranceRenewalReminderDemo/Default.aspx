@@ -19,7 +19,7 @@
     <%--Header--%>
     <div class="jumbotron">
         <h1 class="hd1">ROYAL LONDON INSURANCE RENEWAL UTILITY</h1>
-        <p class="p1">This utility will help you create templates for emails to be sent to clients for their Insurance Renewal Reminder.</p>
+        <p class="p1">Creating Invitation letters & reminders for Insurance renewal for customers of Royal London Insurance</p>
     </div>
 
     <%--Main section--%>
